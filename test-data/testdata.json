@@ -1,0 +1,11 @@
+[{
+    "transferfrom":"Salary Account",
+    "transferto":"Electricity Bill",
+    "amount":"100"
+},
+{
+    "transferfrom":"Salary Account",
+    "transferto":"Mortgage Payment",
+    "amount":"100"
+}
+]

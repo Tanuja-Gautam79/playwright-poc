@@ -1,0 +1,26 @@
+import { test, expect } from '@playwright/test';
+
+test('test qbank login recorded', async ({ page }) => {
+  await page.goto('https://qbank.accelq.com/');
+  await page.getByPlaceholder('Username').click();
+  await page.getByText('Show Credentials').click();
+  await page.getByPlaceholder('Username').click();
+  await page.getByPlaceholder('Username').fill('qbankadmin');
+  await page.getByPlaceholder('Username').press('Tab');
+  await page.getByPlaceholder('Password').fill('qbTrnPass1&');
+  await page.getByRole('button', { name: 'Sign In' }).click();
+  await page.getByText('Make a Transfer').click();
+  await page.getByLabel('Transfer from').selectOption('Salary Account');
+  await page.getByLabel('Transfer to').selectOption('Electricity Bill');
+  await page.getByText('Transfer amount not to exceed $').click();
+  await page.getByLabel('Amount ($)').click();
+  await page.getByLabel('Amount ($)').fill('100');
+  await page.getByLabel('Amount ($)').press('Tab');
+  await page.getByLabel('Date of Transfer').press('Tab');
+  await page.getByLabel('Memo').fill('tes');
+  await page.getByLabel('Memo').press('Tab');
+  await page.getByLabel('One-time').press('Tab');
+  await page.getByRole('button', { name: 'Submit' }).click();
+  await expect(page.locator('#qbf-conf')).toContainText('Transfer of $100.00 from Salary Account account to Electricity Bill has been initiated. Your updated total balance is $5,069,395.00');
+  await expect(page.locator('#sub-qb')).toContainText('Go to Account Summary');
+});
